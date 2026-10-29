@@ -47,7 +47,7 @@ Android 11 / T982 社区案例里的“临时停用 `com.android.packageinstalle
 - 商品型号：雷鸟鹤 6 Ultra，2027 款，85 英寸（所有者提供）。
 - 系统识别：IFFALCON/TCL，设备代号 `T966D5`，产品名 `T966D5_4K_CN`，平台 `t6x` / `amlogic`。
 - 固件：Android 14 / SDK 34，构建号 `UTT2.250416.001 AU01`；约 2 GB RAM，32 位 ARM。
-- Aerial 1.46（`app.orchard.tv/.MainActivity`）已设为 HOME。所有者确认重启后未按 Home 键即自动进入 Aerial。
+- Aerial 1.69（`app.orchard.tv/.MainActivity`）已设为 HOME。所有者确认重启后未按 Home 键即自动进入 Aerial。
 - 18 个 TCL 包使用 `pm disable-user --user 0` 停用，没有卸载或删除原机应用。
 - 一次重启后，TCL 更新器重新启用了 `com.tcl.ffeducation`；随后再次停用，但这次再次停用后的重启尚未验证。
 - 最近一次记录中，电视输入、飞牛影视、多屏互动、Android 安装器、权限控制器和 Aerial HomeGuard 均处于启用状态。
@@ -56,12 +56,16 @@ Android 11 / T982 社区案例里的“临时停用 `com.android.packageinstalle
 
 - [设备档案与操作边界](docs/device-profile.md)
 - [Aerial HOME 实机记录](docs/aerial-home.md)
+- [T966D5 Aerial 机型适配复测稿（未提交）](docs/aerial-adapt-T966D5.md)
 - [停用包记录与影响](docs/debloat.md)
 - [应用与 TVBox 记录](docs/apps-and-tvbox.md)
 - [备份范围与恢复方法](docs/backup-and-recovery.md)
 - [操作日志](docs/operation-log.md)
-- [`report.sh` 诊断输出全文](diagnostics/2026-10-29-report.sh.md)
-- [`selftest.sh` 诊断输出全文及结果更正](diagnostics/2026-10-29-selftest.sh.md)
+- [`report.sh` 1.69 诊断输出全文](diagnostics/2026-10-29-report.sh.md)
+- [`report.sh` 1.46 历史诊断](diagnostics/2026-10-29-report-v1.46.md)
+- [`selftest.sh` 1.46 首次失败输出及误报更正](diagnostics/2026-10-29-selftest.sh.md)
+- [`selftest.sh` 1.69 待机/重启/输入复测全文](diagnostics/2026-10-29-selftest-rerun.sh.md)
+- [`selftest.sh` 1.46 历史复测](diagnostics/2026-10-29-selftest-v1.46-rerun.md)
 - [本会话可见聊天记录（脱敏）](docs/conversation-redacted.md)
 - [社交媒体案例文案](docs/social-media-kit.md)
 - [四篇平台发布包（抖音/小红书视频与图文）](docs/social-campaign/README.md)
