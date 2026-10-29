@@ -11,7 +11,15 @@
 这台雷鸟鹤 6 Ultra（系统识别为 T966D5 / Android 14 / AU01）最终通过官方 Aerial **standard** 版实现真正的默认 HOME。我们在 Aerial 上游提交的 [Issue #420](https://github.com/pengchujin/aerial-tv/issues/420) 记录了适配背景、实测结果和更细的复现材料；下方是本仓库的简明方案。
 
 1. **先核对机型和固件。** 下面流程只在本仓库记录的 T966D5 / Android 14 / `UTT2.250416.001 AU01` 上实测。备份原始 HOME、启动项、完整安装配置及缓存、应用状态；其他机型或配置结构不同，应先停下来重新调查。
-2. **通过电视内置多屏互动安装通道。** 普通 ADB 安装 Aerial standard 会被本固件的 TCL 桌面签名校验拒绝。我们读取安装策略后，只在 `launcherStrategy.packages` 临时放行 `app.orchard.tv`，保留其他校验策略；重启后同时确认配置数据库与 FeatureCache 已加载临时值，再由多屏互动推送官方 standard APK，并在电视弹窗上确认安装。不能只改数据库而忽略缓存。
+2. **通过电视内置多屏互动安装通道，并临时放行 Aerial。** 普通 ADB 安装 Aerial standard 会被本固件的 TCL 桌面签名校验拒绝。排查后确认，TCL 在 `content://com.tcl.providers.config/InstallConfig` 提供安装策略配置；其中 `launcherStrategy.packages` 是 **TCL 自己的桌面应用安装白名单**，不是 Android 通用设置。实机读取到的相关配置项类似：
+
+   ```json
+   {"enable":"true","name":"launcherStrategy","packages":[],"priority":"3"}
+   ```
+
+   安装时只将这个项目的 `packages` 从空列表临时改为 `["app.orchard.tv"]`，让 Aerial 通过该桌面安装策略中的厂商签名检查；其他策略和整体校验保持原样。这个白名单**只影响安装是否放行，不会把 Aerial 设为默认 HOME**；默认 HOME 是后续单独通过 Android 的 `cmd package set-home-activity` 设置的。上面的 JSON 只是相关配置项示例，**不能当作完整配置直接写回**。
+
+   本机的 TCL 配置服务会缓存策略：只改数据库可能不会更新 FeatureCache，安装器仍可能读到旧值。因此实测先备份完整原配置、缓存及权限状态，再只改这一项；正常重启后同时读回数据库和 FeatureCache，确认都加载了临时白名单，才继续安装。安装成功或失败后都恢复原配置并再次重启，逐项核对数据库与缓存均与备份一致。不要长期保留临时白名单，也不要只恢复数据库就认为已经恢复完成。更细的实机诊断与复现材料见 [Aerial Issue #420](https://github.com/pengchujin/aerial-tv/issues/420)。确认临时值生效后，再由多屏互动推送官方 standard APK，并在电视弹窗上确认安装。
 3. **把 Aerial 登记为默认 HOME。** 核实安装包、签名/版本及 HOME 活动后执行：
 
    ```sh
@@ -56,6 +64,7 @@ Android 11 / T982 社区案例里的“临时停用 `com.android.packageinstalle
 - [`selftest.sh` 诊断输出全文及结果更正](diagnostics/2026-10-29-selftest.sh.md)
 - [本会话可见聊天记录（脱敏）](docs/conversation-redacted.md)
 - [社交媒体案例文案](docs/social-media-kit.md)
+- [四篇平台发布包（抖音/小红书视频与图文）](docs/social-campaign/README.md)
 - [恢复停用包脚本](scripts/restore-packages.sh)
 
 ## 安全与隐私
