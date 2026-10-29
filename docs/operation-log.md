@@ -18,3 +18,11 @@ Dates use China Standard Time. This is a single device's running record; not eve
 - Rebooted after all 18 were disabled. Android completed boot, Aerial was on screen without a Home command, and all 18 were initially reported disabled.
 - TCL's updater then updated FF Education at 17:15:55 and re-enabled it. It was disabled again; this final re-disable has not been followed by another reboot.
 - No package uninstall, data clear, root, or firmware flash was performed.
+
+## 2026-10-29: Aerial diagnostic self-test
+
+- Archived the full sanitized `report.sh` output and full `selftest.sh` output in [`diagnostics/`](../diagnostics/).
+- Self-test passed the Aerial HomeGuard/default HOME check, Home from Aerial, Home from a third-party app, and the first foreground sample after reboot (Aerial, about one second after boot).
+- Standby test observed `Asleep`; after the 70-second wait and wake, `com.tcl.tv` remained foreground for the next 60 seconds. Aerial did not return automatically during that interval.
+- Signal-source enumeration could not be completed: Aerial 1.46 returned a settings string instead of the JSON source list expected by the script. No input was opened. The script's resulting `inputs PASS 0 listed` is a false positive and is corrected in the diagnostic note.
+- Added a redacted visible-message transcript in [`conversation-redacted.md`](conversation-redacted.md). Network addresses and absolute paths are removed; hidden reasoning and tool-internal payloads are excluded.
