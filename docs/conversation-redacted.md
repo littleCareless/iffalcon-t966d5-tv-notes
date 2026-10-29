@@ -2048,3 +2048,11 @@ Homebrew 在这台 Intel Mac 上准备源码构建依赖，安装无进展。我
 ## 312. 助手
 
 `gh auth status` 确认已登录 GitHub.com 账号 `littleCareless`，协议为 HTTPS。查询到 Aerial 已有 T966D5 的历史报告 #420，以及同一系统设备标识、不同零售型号的机型 issue #817；待审稿已补上关联说明，尚未创建新 issue。
+
+## 313. 用户
+
+用户确认按 `adapt.md` 的提交方式发布，并授权创建 Aerial issue。
+
+## 314. 助手
+
+按指南通过 `gh issue create --body-file` 发布了机型适配报告：[Aerial issue #885](https://github.com/pengchujin/aerial-tv/issues/885)。回读确认 issue 为公开 OPEN 状态，标题正确，正文与脱敏提交稿一致。随后把提交稿和案例仓库里的“未提交”状态更新为已发布；没有上传 ADB 认证信息或私有截图。
