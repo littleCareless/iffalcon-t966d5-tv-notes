@@ -3,7 +3,7 @@
 ## Result
 
 - Aerial package: `app.orchard.tv`.
-- Current installed release observed: official standard v1.46, versionCode 49.
+- Current installed release observed: official standard v1.69, versionCode 85.
 - HOME resolver: `app.orchard.tv/.MainActivity`, marked default.
 - After a system reboot, Aerial was captured on screen without an ADB Home-key or app-launch command.
 - CyberUI remains installed and enabled for recovery.
@@ -17,9 +17,13 @@ This is an observed method for the stated device and firmware only. The private 
 ## Releases and verification
 
 - Aerial 1.28 standard was installed as the HOME-capable edition after the initial guard setup.
-- Later updates through official releases culminated in v1.46. The local record verified the official APK signature against the installed app and checked the resulting package version and HOME resolver.
+- Later updates through official releases reached v1.46 and then v1.69. The v1.69 record verifies the official APK hash/signer, restored TCL install strategy, package states, HOME resolver and boot target.
 - Official project: [Aerial TV releases](https://github.com/pengchujin/aerial-tv/releases).
 - The earlier public 1.28 HOME case was also recorded in [Aerial TV issue #420](https://github.com/pengchujin/aerial-tv/issues/420). This repository should add the later debloat and updater-state observations without rewriting that historical result.
+
+## 2026-10-29 Aerial 1.69 adaptation
+
+On the T966D5 / AU01, Home from Aerial and another app passed; standby returned to Aerial 0.7 seconds after wake; reboot first sampled Aerial after 2 seconds, and the owner confirmed it was visible without pressing Home. Aerial listed and opened HDMI 1–4, TV, AV and USB; the owner confirmed the source mapping and HDMI 2 picture. Aerial reported no custom device profile was needed. See [the complete adaptation report](aerial-adapt-T966D5.md) and [full diagnostics](../diagnostics/).
 
 ## Limits
 
