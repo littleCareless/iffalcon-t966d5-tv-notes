@@ -20,10 +20,13 @@ Device-specific notes for one IFFALCON/TCL T966D5 running Android 14. This repos
 - [App and TVBox notes](docs/apps-and-tvbox.md)
 - [Backup limits and recovery](docs/backup-and-recovery.md)
 - [Dated operation log](docs/operation-log.md)
+- [Full `report.sh` output](diagnostics/2026-10-29-report.sh.md)
+- [Full `selftest.sh` output and correction](diagnostics/2026-10-29-selftest.sh.md)
+- [Redacted visible conversation transcript](docs/conversation-redacted.md)
 - [Re-enable script](scripts/restore-packages.sh)
 
 ## Privacy and files intentionally omitted
 
-This repository does not contain the TV's IP addresses, serial number, ADB keys, account credentials, raw system-settings dumps, TCL configuration database/cache, app data, screenshots, APK files, or the local backup. The local recovery snapshot is incomplete for six protected system/vendor overlays; details are in [backup and recovery](docs/backup-and-recovery.md).
+This repository does not contain the TV's network addresses, serial number, ADB keys, account credentials, full system-settings dumps, TCL configuration database/cache, app data, screenshots, APK files, or the local backup. The diagnostic output includes only selected system fields needed for this case; the customized HDMI-CEC device name, local paths, and network addresses are redacted. The conversation transcript contains visible user/assistant messages only, with network addresses and absolute paths redacted; hidden reasoning and tool-internal payloads are excluded. The local recovery snapshot is incomplete for six protected system/vendor overlays; details are in [backup and recovery](docs/backup-and-recovery.md).
 
-No license is included yet. If this repository is published, its visibility and reuse license should be chosen by the owner.
+No license is included; reuse rights remain unspecified.
