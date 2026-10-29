@@ -16,8 +16,8 @@ One secondary report also quoted a Xiaohongshu TV-modding note with 481 likes an
 
 ## Our case, stated accurately
 
-- Device: one IFFALCON/TCL T966D5, Android 14, build `UTT2.250416.001 AU01`.
-- Goal: replace the HOME experience with Aerial while keeping CyberUI and the factory apps available.
+- Device: owner-identified as a 2027 85-inch Thunderbird He 6 Ultra; Android reports IFFALCON/TCL T966D5, Android 14, build `UTT2.250416.001 AU01`. The marketed name is owner-provided and is kept distinct from the firmware identifier.
+- Goal: replace the HOME experience with Aerial while preserving the original system apps; CyberUI remains installed and enabled as fallback. A later, separate experiment disabled 18 packages without uninstalling them.
 - Main obstacle: TCL's installer rejected Aerial's HOME-capable APK with a vendor verification failure.
 - Working path on this unit: use the TV's MultiScreen installation route and a temporary, package-specific exception for `app.orchard.tv` in TCL's launcher install strategy. The relevant config was changed through the TCL config provider and its feature cache; this was not simply editing a database file by hand. The saved original strategy was restored after the installation/update.
 - Result: official Aerial standard 1.46 was observed as the default HOME and on screen after reboot without a Home-key command. CyberUI stayed installed and enabled as fallback.
@@ -27,7 +27,7 @@ One secondary report also quoted a Xiaohongshu TV-modding note with 481 likes an
 
 ## Suggested title and hooks
 
-**Primary title:** `雷鸟电视第三方桌面总被拦？我把失败过程和可复现证据都记下来了`
+**Primary title:** `雷鸟鹤6 Ultra 换桌面实测：第三方桌面被拦后，我这样排查`
 
 Possible opening lines:
 
@@ -40,8 +40,8 @@ Avoid “所有 TCL 都适用”“永久去广告”“AI 一句话完全控制
 ## Douyin short-video draft (about 35 seconds)
 
 **0–3 s — hook, show the TV**  
-On-screen: `雷鸟电视装第三方桌面，被系统拦了怎么办？`  
-Voice: `我这台 TCL T966D5，装 Aerial 时被系统的桌面校验拦截。`
+On-screen: `雷鸟鹤6 Ultra 装第三方桌面，被系统拦了怎么办？`  
+Voice: `我这台雷鸟鹤6 Ultra，系统识别型号是 T966D5，装 Aerial 时被 TCL 的桌面校验拦截。`
 
 **3–9 s — before/after**  
 Use real, same-camera shots of CyberUI and Aerial. Do not use a generated mock screen.  
@@ -63,7 +63,7 @@ Suggested caption: `一台雷鸟 T966D5 的第三方 HOME 实测：遇到 TCL �
 
 ## Xiaohongshu carousel draft (8 panels)
 
-1. **Cover:** `雷鸟电视换桌面踩坑记录` / `T966D5 · Android 14 · Aerial 1.46` with a real Aerial screen photo.
+1. **Cover:** `雷鸟鹤6 Ultra 换桌面踩坑记录` / `T966D5 · Android 14 · Aerial 1.46` with a real Aerial screen photo.
 2. **Before:** CyberUI HOME, photographed straight-on; add a small “原厂桌面” caption.
 3. **The blocker:** sanitized installation failure text: `INSTALL_FAILED_VERIFICATION_FAILURE`; explain that the vendor check blocked the HOME-capable APK.
 4. **What actually worked:** backup current config → temporary package-specific Aerial exception → MultiScreen push/install → restore the saved config → reboot and check. Keep internals high-level; link the repository for exact evidence.
@@ -74,7 +74,7 @@ Suggested caption: `一台雷鸟 T966D5 的第三方 HOME 实测：遇到 TCL �
 
 Suggested note text:
 
-> 给一台雷鸟 T966D5 换 Aerial 桌面，真正卡住我的不是安装包，而是 TCL 的桌面安装校验。经过备份、临时单包放行、电视自带多屏互动安装，再恢复策略，Aerial 1.46 成为默认 HOME；原厂 CyberUI 仍保留。重启后首次检查已进入 Aerial，但待机唤醒测试仍回到 TCL TV，信号源逐项测试也没跑通。完整诊断输出、脱敏会话记录、设备限制和恢复说明都放在公开仓库。只验证了这一台和这一版固件，别把包名或数据库方案直接套到其他电视。
+> 给一台雷鸟鹤6 Ultra（系统识别 T966D5）换 Aerial 桌面，真正卡住我的不是安装包，而是 TCL 的桌面安装校验。经过备份、临时单包放行、电视自带多屏互动安装，再恢复策略，Aerial 1.46 成为默认 HOME；原厂 CyberUI 仍保留。重启后首次检查已进入 Aerial，但待机唤醒测试仍回到 TCL TV，信号源逐项测试也没跑通。完整诊断输出、脱敏会话记录、设备限制和恢复说明都放在公开仓库。只验证了这一台和这一版固件，别把包名或数据库方案直接套到其他电视。
 
 ## Screenshot and recording checklist
 
