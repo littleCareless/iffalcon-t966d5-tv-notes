@@ -1985,16 +1985,38 @@ Home 守护和“从其他应用按 Home 回到 Aerial”两项已经通过；�
 
 ## 298. 用户
 
-请在 README 里更详细说明本机的 `launcherStrategy.packages`：配置入口、示例值、临时添加 `app.orchard.tv` 的作用，以及它与设置默认 HOME 的区别。
+直接在 README 提供我们的解决方案，是如何把 Aerial 设置为 Home 的；Aerial 项目 Issue #420 也是我们提供的，可以参考。
 
 ## 299. 助手
 
-README 已说明这是 TCL 自己的桌面安装策略白名单，入口为 `content://com.tcl.providers.config/InstallConfig`。实测只临时添加 Aerial 包名；它仅影响厂商安装校验，设置默认 HOME 仍须单独执行 Android HOME 配置。文档也说明了 FeatureCache、重启生效、恢复原配置和逐项核对的过程。
+README 已补上本机实测的 HOME 设置流程，并链接 Aerial Issue #420；步骤注明适用范围仅限已验证的 T966D5 固件。
 
 ## 300. 用户
 
-仓库许可证使用 MIT。
+仓库许可证 MIT。
 
 ## 301. 助手
 
 已添加 MIT `LICENSE` 并更新 README，注明仓库许可不涵盖电视固件、Aerial 等第三方软件和商标。
+
+## 302. 用户
+
+`launcherStrategy.packages` 是什么？我们有提到吗？在什么位置，能不能更详细？
+
+## 303. 助手
+
+这是 TCL 自己的桌面安装策略白名单，不是 Android 默认 HOME 设置。README 第 2 步和 Aerial Issue #420 提到了配置入口、白名单作用和缓存。单独设置 HOME 仍通过 Android 包管理命令完成；厂商缓存需要重启加载，并在安装后恢复和核对。
+
+## 304. 用户
+
+请把 README 第 2 步写详细，包括本机读取到的配置入口 `content://com.tcl.providers.config/InstallConfig`。相关项类似：
+
+```json
+{"enable":"true","name":"launcherStrategy","packages":[],"priority":"3"}
+```
+
+实测时只把 `packages` 临时改成 `["app.orchard.tv"]`。这让 TCL 的桌面安装策略允许 Aerial 通过对应签名检查；它本身不会把 Aerial 设为默认 HOME，默认 HOME 是另一步通过 Android 的 `cmd package set-home-activity` 设置的。这个配置有厂商缓存：只改数据库可能不会生效，因此当时先备份原配置和缓存，重启确认两边加载临时值；安装后恢复原配置，再重启并逐项核对已恢复。
+
+## 305. 助手
+
+README 第 2 步已展开，说明了配置入口、白名单键、单包临时放行、与默认 HOME 的区别，以及备份、缓存重启和恢复核验。GitHub 回读确认了更新内容。
