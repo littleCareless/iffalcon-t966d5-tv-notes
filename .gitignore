@@ -1,0 +1,14 @@
+# Keep device-specific backups and vendor binaries local.
+backup/
+private/
+*.apk
+*.apks
+*.aab
+*.adbkey
+*.adbkey.pub
+.env
+local-device.txt
+screenshots/
+*.png
+*.jpg
+*.jpeg
