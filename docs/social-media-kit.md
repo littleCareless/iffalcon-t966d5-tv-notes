@@ -107,3 +107,12 @@
 - 热门帖及互动数据来自媒体对原帖的转述；数字会随时间变化，未在原平台实时核实。
 - 小米电视排查文章是另一台电视的第一手记录，可参考其叙事方式，但不能证明本 TCL 电视也有相同行为。
 - Aerial 项目页面是其安装流程、机型说明和功能的第一方来源；本案例结论依据这台电视的实际诊断记录。
+
+## 四篇发布素材
+
+- [抖音视频](social-campaign/douyin-video.md)
+- [抖音图文](social-campaign/douyin-graphic.md)
+- [小红书视频](social-campaign/xiaohongshu-video.md)
+- [小红书图文](social-campaign/xiaohongshu-graphic.md)
+- [截图素材与 AI 视频制作说明](social-campaign/assets-and-ai-video.md)
+- [四篇发布包总览](social-campaign/README.md)
