@@ -80,7 +80,7 @@ Suggested note text:
 
 Capture fresh material from the TV before posting; no screenshot is fabricated or included in the public repository.
 
-There are older local candidate captures from the initial HOME setup, but the `before` image shows a TCL account/membership banner and the Aerial image exposes city, time, and weather. They also predate the 1.46 diagnostic run, so they should not be presented as current-version or reboot-test proof. Prefer a fresh capture; otherwise crop or mask those areas before sharing.
+There is a local 2026-10-29 post-reboot Aerial capture (`after-batch3-reboot.png`) that can serve as a current HOME visual, but its status bar shows the city, time, and weather, and it does not show the Aerial version. Crop or mask that strip before sharing, and use the diagnostic output separately for the 1.46/version and reboot evidence. Older `before-home.png` material shows a TCL account/membership banner; replace it with a fresh capture or crop that banner out.
 
 - Clear, full-screen CyberUI “before” and Aerial “after”, same camera angle and screen brightness.
 - Aerial About/version page showing `1.46`.
