@@ -56,7 +56,7 @@ Android 11 / T982 社区案例里的“临时停用 `com.android.packageinstalle
 
 - [设备档案与操作边界](docs/device-profile.md)
 - [Aerial HOME 实机记录](docs/aerial-home.md)
-- [T966D5 Aerial 机型适配复测稿（未提交）](docs/aerial-adapt-T966D5.md)
+- [T966D5 Aerial 机型适配报告（Aerial issue #885）](docs/aerial-adapt-T966D5.md)
 - [停用包记录与影响](docs/debloat.md)
 - [应用与 TVBox 记录](docs/apps-and-tvbox.md)
 - [备份范围与恢复方法](docs/backup-and-recovery.md)
