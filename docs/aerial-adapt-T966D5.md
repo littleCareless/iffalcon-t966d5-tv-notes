@@ -4,6 +4,30 @@ Prepared 2026-10-29 from the official diagnostic scripts, an update to Aerial 1.
 
 Privacy: the locally customized HDMI-CEC name is redacted. The report contains no TV IP, ADB key, account data, serial number, screenshots, APKs, or absolute host paths.
 
+## Device and adaptation request
+
+- Brand/product: IFFALCON / TCL; owner-described product is 雷鸟鹤 6 Ultra 2027 款 85 英寸. The system reports model `Smart TV Pro`, device `T966D5`, product `T966D5_4K_CN`.
+- Aerial version in this report: official standard 1.69, versionCode 85.
+- Owner's request: “读 adapt.md，给我的电视做 Aerial 适配。” The prior device issue was that TCL's desktop-install verification rejected an alternative launcher. The owner asked whether the successful whitelist procedure was specific to this unit: “但是这个问题我们解决了，不过我不清楚，是不是只有我本机可以这样的操作；我们用的方案不就是修改数据库白名单，对吧。”
+- The original install symptom was an ordinary ADB install rejected with `INSTALL_FAILED_VERIFICATION_FAILURE` / TCL launcher signature verification (`app.orchard.tv metaData is null`). The owner described the broader device issue as “好多 TCL 设备都说无法安装第三方桌面、跳回什么的”，and asked whether the whitelist method was unique to this unit. On this firmware, the reversible one-package launcher exception plus the TV's MultiScreen install path resolved the install block. This only establishes the procedure on this exact device/build; other TCL firmware was not tested.
+- The 1.69 adaptation run was requested to validate Home, standby wake, reboot behavior, and each listed source, and to identify whether a device profile correction was needed.
+
+## Before and after self-test
+
+### Before: Aerial 1.46
+
+The earlier 1.46 self-test ran with `STANDBY=1 REBOOT=1 INPUTS=1`. HomeGuard, Home from Aerial, Home from another app, and reboot passed. Standby failed once: after the TV slept for 70 seconds and woke, `com.tcl.tv` stayed foreground for 60 seconds. The `INPUTS=1` run did not actually test inputs: the source-list call returned configuration text, no input was opened, and the script's `inputs PASS 0 listed` was a false positive. A same-version repeat, with no settings changed, passed standby (Aerial returned 0.6 seconds after wake); source listing was still unavailable. Full historical outputs: [initial 1.46 run](../diagnostics/2026-10-29-selftest.sh.md) and [repeat 1.46 run](../diagnostics/2026-10-29-selftest-v1.46-rerun.md).
+
+### After: Aerial 1.69
+
+The complete current `selftest.sh` output follows the `report.sh` material below. HomeGuard, Home from Aerial, Home from another app, standby wake, reboot, and all seven listed inputs passed. Standby returned to Aerial 0.7 seconds after wake; the first post-reboot sample at 2 seconds was Aerial. The owner confirmed the visible input mapping, including the connected device on HDMI 2.
+
+## Switches and device profile
+
+- No Aerial behavior switch was changed during the 1.69 run. `guard_off_in_standby=false` and `keep_adb=false` remained at their existing values. The prior 1.46 standby repeat also passed without changing settings; therefore no switch was trialed as a fix.
+- Device profile: Aerial diagnostics reported `None`. No profile override was applied. The tested source labels and visible mappings matched, so the final profile JSON is **none / default**; there is no correction JSON to submit.
+- No brightness test was performed.
+
 ## `report.sh` full output
 
 ### adb report
