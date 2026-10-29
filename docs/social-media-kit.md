@@ -80,6 +80,8 @@ Suggested note text:
 
 Capture fresh material from the TV before posting; no screenshot is fabricated or included in the public repository.
 
+There are older local candidate captures from the initial HOME setup, but the `before` image shows a TCL account/membership banner and the Aerial image exposes city, time, and weather. They also predate the 1.46 diagnostic run, so they should not be presented as current-version or reboot-test proof. Prefer a fresh capture; otherwise crop or mask those areas before sharing.
+
 - Clear, full-screen CyberUI “before” and Aerial “after”, same camera angle and screen brightness.
 - Aerial About/version page showing `1.46`.
 - A short continuous recording: press Home from another app, reboot, then film the first visible screen. Do not edit out an intervening manufacturer screen if it appears.
