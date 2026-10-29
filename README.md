@@ -23,6 +23,7 @@ Device-specific notes for one IFFALCON/TCL T966D5 running Android 14. This repos
 - [Full `report.sh` output](diagnostics/2026-10-29-report.sh.md)
 - [Full `selftest.sh` output and correction](diagnostics/2026-10-29-selftest.sh.md)
 - [Redacted visible conversation transcript](docs/conversation-redacted.md)
+- [Social media research and prepared copy](docs/social-media-kit.md)
 - [Re-enable script](scripts/restore-packages.sh)
 
 ## Privacy and files intentionally omitted
