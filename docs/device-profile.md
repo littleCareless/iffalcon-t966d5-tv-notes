@@ -15,7 +15,7 @@ Observed on 2026-10-29 through the owner's authorized Wi-Fi ADB connection.
 | RAM | About 2 GB |
 | ABI | 32-bit ARM (`armeabi-v7a`) |
 | Original HOME | `com.tcl.cyberui/.MainActivity` |
-| Current HOME | `app.orchard.tv/.MainActivity` (Aerial 1.46, versionCode 49) |
+| Current HOME | `app.orchard.tv/.MainActivity` (Aerial 1.69, versionCode 85) |
 
 The full build fingerprint is `TCL/T966D5_4K_CN/T966D5:14/UTT2.250416.001/AU01:user/release-keys`. Network addresses and device identifiers are intentionally omitted.
 
