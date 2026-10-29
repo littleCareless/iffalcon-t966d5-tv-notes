@@ -1,6 +1,6 @@
 # Aerial device adaptation report: IFFALCON/TCL T966D5
 
-Prepared 2026-10-29 from the official diagnostic scripts, an update to Aerial 1.69 standard, and owner-confirmed screen observations. This is a draft for the owner to submit; it has not been submitted to the Aerial project.
+Prepared 2026-10-29 from the official diagnostic scripts, an update to Aerial 1.69 standard, and owner-confirmed screen observations. Submitted to the Aerial project as [issue #885](https://github.com/pengchujin/aerial-tv/issues/885) on 2026-10-29.
 
 Privacy: the locally customized HDMI-CEC name is redacted. The report contains no TV IP, ADB key, account data, serial number, screenshots, APKs, or absolute host paths.
 
