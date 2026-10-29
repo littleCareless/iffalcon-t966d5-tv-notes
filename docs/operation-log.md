@@ -35,4 +35,4 @@ Dates use China Standard Time. This is a single device's running record; not eve
 - The owner confirmed after the second update reboot that Aerial appeared without pressing Home. The automated reboot test also first sampled Aerial at 2 seconds.
 - Aerial 1.69 selftest passed Home on Aerial, Home from another app, standby wake (0.7 s), reboot, and all seven inputs. The owner confirmed the screen mappings; HDMI 2 displayed the correct connected device. No custom device profile was needed.
 - The first Aerial 1.46 run had one standby failure, then a repeat pass without settings changes. Keep this as historical intermittent behavior; this 1.69 pass does not prove long-term reliability.
-- Full 1.69 `report.sh` and `selftest.sh` outputs are in [`diagnostics/`](../diagnostics/); the review draft is [`aerial-adapt-T966D5.md`](aerial-adapt-T966D5.md). The Aerial issue was not submitted.
+- Full 1.69 `report.sh` and `selftest.sh` outputs are in [`diagnostics/`](../diagnostics/); the submitted Aerial device report is [`aerial-adapt-T966D5.md`](aerial-adapt-T966D5.md), published as [issue #885](https://github.com/pengchujin/aerial-tv/issues/885).
