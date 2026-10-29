@@ -1,103 +1,104 @@
-# Social media research and publication kit
+# 社交媒体案例调研与发布素材
 
-Prepared 2026-10-29. This is a draft for the device owner to review and post; nothing here is published to Douyin or Xiaohongshu.
+整理日期：2026-10-29。本文是供电视所有者审阅并自行发布的草稿；目前没有代为发布到抖音或小红书。
 
-## What has been getting attention
+## 最近受到关注的内容有什么共同点
 
-Recent Android TV modification stories tend to combine a familiar frustration with a visible result and a concrete trail others can inspect:
+近期 Android TV 改造类内容，通常把熟悉的使用烦恼、直观的改造结果和别人能查阅的过程证据放在一起：
 
-1. **Start with a specific pain point.** The widely shared Gathin story began with an ad before Netflix on a family Xiaomi TV. Secondary coverage reported tens of thousands of likes and millions of views on X within about two days. The reported counts differ between articles and are time-dependent, so do not quote them as a verified live count. [What’s Worth Buying report, 2026-10-25](https://post.smzdm.com/p/a4qx050l/)
-2. **Show the before and after immediately.** The original story was described with a side-by-side home-screen comparison. The visual makes the change legible before the viewer knows what ADB or a launcher is. [What’s Worth Buying report, 2026-10-24](https://post.smzdm.com/p/a70plzwl/)
-3. **Tell the troubleshooting story, not just the result.** A detailed Xiaomi case documents the failed ADB connection, the vendor permission limitation, the backup/restore plan, and the fact that disabling the advertisement service alone did not remove ads embedded in the launcher. The diagnostic turns make it more useful than a simple “one prompt fixed it” claim. [Hands-on Xiaomi TV write-up](https://www.getob.cc/zh-cn/posts/2026-10-19-mitv-debloat/)
-4. **Make the evidence reusable.** The Aerial project itself emphasizes model-specific setup, recoverability, and a compatibility boundary: its behavior can differ by manufacturer, model, and firmware. [Aerial setup and device guidance](https://aerial.qust.me/)
-5. **Invite a useful question.** A good ending asks viewers for their brand/model and what they want tested, rather than promising a universal one-click recipe.
+1. **从具体痛点开场。** Gathin 分享的案例起因是家中小米电视打开 Netflix 前先出现广告。媒体转述称，这条 X 帖子在约两天内获得数万点赞和数百万浏览。不同报道的数字并不一致，而且会随时间变化，因此不要把它说成已核实的实时数据。[什么值得买报道，2026-10-25](https://post.smzdm.com/p/a4qx050l/)
+2. **尽早展示改造前后。** 相关报道强调了原厂首页与新桌面的并排对比。观众不必先弄懂 ADB 或启动器，也能一眼看出变化。[什么值得买报道，2026-10-24](https://post.smzdm.com/p/a70plzwl/)
+3. **讲排查过程，不只讲结果。** 一篇小米电视实测记录了 ADB 连接失败、厂商权限限制、备份与恢复方案，以及单独停用广告服务仍没去掉桌面内置广告等过程。这样的细节比“输入一句话就成功”更有参考价值。[小米电视实测记录](https://www.getob.cc/zh-cn/posts/2026-10-19-mitv-debloat/)
+4. **让证据能供别人查阅。** Aerial 项目按品牌、型号和固件说明安装方法、恢复方式与兼容边界；不同电视的行为可能不同。[Aerial 安装与机型说明](https://aerial.qust.me/)
+5. **用具体问题邀请交流。** 结尾可以请观众留言品牌、型号和想测试的项目，不承诺“一套方案适用所有电视”。
 
-One secondary report also quoted a Xiaohongshu TV-modding note with 481 likes and 479 saves over two days, and a separate “AI Harness reverse-engineered two TVs” note with 677 likes, 933 saves, and 147 comments. These are reported snapshots from a media roundup, not counts I independently verified inside Xiaohongshu. Treat them as examples of audience interest, not a performance promise. [What’s Worth Buying roundup](https://post.smzdm.com/p/a70pg5lo/)
+另有媒体汇总转述了一篇小红书电视改造笔记：两天约 481 个赞、479 次收藏；另一篇“AI Harness 逆向两台电视”笔记据称有 677 个赞、933 次收藏和 147 条评论。这些数字来自媒体汇总，我没有在小红书原帖中独立核实，只适合作为受众关注度的参考，不代表效果承诺。[什么值得买汇总](https://post.smzdm.com/p/a70pg5lo/)
 
-## Our case, stated accurately
+## 本案例：准确描述
 
-- Device: owner-identified as a 2027 85-inch Thunderbird He 6 Ultra; Android reports IFFALCON/TCL T966D5, Android 14, build `UTT2.250416.001 AU01`. The marketed name is owner-provided and is kept distinct from the firmware identifier.
-- Goal: replace the HOME experience with Aerial while preserving the original system apps; CyberUI remains installed and enabled as fallback. A later, separate experiment disabled 18 packages without uninstalling them.
-- Main obstacle: TCL's installer rejected Aerial's HOME-capable APK with a vendor verification failure.
-- Working path on this unit: use the TV's MultiScreen installation route and a temporary, package-specific exception for `app.orchard.tv` in TCL's launcher install strategy. The relevant config was changed through the TCL config provider and its feature cache; this was not simply editing a database file by hand. The saved original strategy was restored after the installation/update.
-- Result: official Aerial standard 1.46 was observed as the default HOME and on screen after reboot without a Home-key command. CyberUI stayed installed and enabled as fallback.
-- Later optional debloat trial: 18 packages were disabled reversibly, not uninstalled. This is specific to this unit and is not the core HOME workaround. The repo records effects and rollback information.
-- Known limits from the 2026-10-29 self-test: standby wake did **not** return to Aerial within 60 seconds; the Aerial signal-source enumeration script failed to retrieve a list, so no input-by-input test was completed. The script's “0 inputs PASS” is a false positive and is corrected in the diagnostics note.
-- This is a single-device observation. It does not establish that other TCL televisions or firmware builds use the same config keys or installation behavior.
+- 设备：所有者称为雷鸟鹤 6 Ultra 2027 款 85 英寸；Android 系统识别为 IFFALCON/TCL T966D5，Android 14，构建号 `UTT2.250416.001 AU01`。商品名称由所有者提供，与系统识别的型号分开记录。
+- 目标：用 Aerial 替换 HOME 桌面，同时保留原机系统应用；CyberUI 仍安装并启用，可作为备用桌面。后续另有一轮独立实验，将 18 个应用包可逆停用，没有卸载它们。
+- 遇到的问题：TCL 安装器以厂商校验失败为由，拒绝安装支持 HOME 的 Aerial APK。
+- 本机验证通过的路径：使用电视自带的“多屏互动”安装流程，并在 TCL 桌面安装策略中临时为 `app.orchard.tv` 添加单包例外。相关配置经 TCL 配置 Provider 和 FeatureCache 更新；并非直接手工编辑数据库文件。安装或升级完成后，恢复了原有策略。
+- 结果：官方 Aerial standard 1.46 已被设为默认 HOME。重启后，没有发送 Home 键或启动 Aerial 的命令，设备首次采样时 Aerial 已在前台。CyberUI 仍安装并启用。
+- 后续的可选精简实验：18 个包使用可恢复方式停用，没有卸载。该实验只针对这台电视，不是更换 HOME 的必要步骤。仓库记录了影响与恢复方法。
+- 2026-10-29 自测中的限制：待机唤醒后 60 秒内没有返回 Aerial；Aerial 信号源枚举脚本未能读到列表，因此没有逐项打开信号源。脚本打印的“0 项 PASS”属于误报，已在诊断说明中更正。
+- 这是单台设备的观察结果，不能证明其他 TCL 电视或固件使用相同配置项或安装策略。
 
-## Suggested title and hooks
+## 标题与开场句建议
 
-**Primary title:** `雷鸟鹤6 Ultra 换桌面实测：第三方桌面被拦后，我这样排查`
+**主标题：** `雷鸟鹤 6 Ultra 换桌面实测：第三方桌面被拦后，我这样排查`
 
-Possible opening lines:
+开场句可选：
 
 - `这台雷鸟电视装第三方桌面，第一次被系统安装校验拦了。`
-- `折腾电视桌面最难的不是装 APK，而是找出厂商到底拦在哪一层。`
-- `我没有刷机，也没删原厂桌面：最后让 Aerial 接管了 Home 键和开机入口。`
+- `折腾电视桌面，最难的不是找 APK，而是弄清楚厂商拦在哪一层。`
+- `我没有刷机，也没有卸载原厂桌面；最后让 Aerial 接管了 Home 键和开机入口。`
 
-Avoid “所有 TCL 都适用”“永久去广告”“AI 一句话完全控制电视” and similar universal claims.
+避免使用“所有 TCL 都适用”“永久去广告”“AI 一句话完全控制电视”等无法由本案例支持的说法。
 
-## Douyin short-video draft (about 35 seconds)
+## 抖音短视频脚本（约 35 秒）
 
-**0–3 s — hook, show the TV**  
-On-screen: `雷鸟鹤6 Ultra 装第三方桌面，被系统拦了怎么办？`  
-Voice: `我这台雷鸟鹤6 Ultra，系统识别型号是 T966D5，装 Aerial 时被 TCL 的桌面校验拦截。`
+**0–3 秒：开场，拍电视**  
+画面文字：`雷鸟鹤 6 Ultra 装第三方桌面，被系统拦了怎么办？`  
+旁白：`我这台雷鸟鹤 6 Ultra，系统识别型号是 T966D5。装 Aerial 时，被 TCL 的桌面校验拦住了。`
 
-**3–9 s — before/after**  
-Use real, same-camera shots of CyberUI and Aerial. Do not use a generated mock screen.  
-Voice: `我想保留原厂应用，只换 HOME。`
+**3–9 秒：改造前后对比**  
+用同一机位拍 CyberUI 和 Aerial 的真实画面，不要使用生成的假界面。  
+旁白：`当时我的目标很简单：只换 HOME，保留原厂桌面和系统应用。`
 
-**9–20 s — the key discovery**  
-Show a sanitized terminal/log close-up, with IPs, serials, account names and local paths hidden.  
-Voice: `最后发现不是 APK 坏了，而是 TCL 的安装策略没放行这个桌面包。备份策略后，我只临时放行 Aerial，再走电视自己的多屏互动安装入口。`
+**9–20 秒：讲关键发现**  
+展示已脱敏的终端或日志，不要露出 IP、序列号、账号名和本机路径。  
+旁白：`后来查明不是 APK 坏了，而是 TCL 的安装策略没有放行这个桌面包。先备份原策略，只临时放行 Aerial，再走电视自带的多屏互动安装流程。`
 
-**20–29 s — proof and boundary**  
-Show Aerial version page, Home key, then reboot-to-Aerial proof if freshly recorded.  
-Voice: `装好恢复策略后，Aerial 1.46 成为默认 HOME，重启后首次检查已经在 Aerial。原厂 CyberUI 还保留着。`
+**20–29 秒：展示验收结果**  
+拍 Aerial 版本页、按 Home 键，以及重新启动后电视进入 Aerial 的连续实拍。  
+旁白：`恢复原策略后，Aerial 1.46 成为默认 HOME。重启后的首次检查已经在 Aerial，原厂 CyberUI 也还保留着。`
 
-**29–35 s — honest caveat and CTA**  
-On-screen: `单台 T966D5 / Android 14 实测；待机回桌面仍有问题`  
-Voice: `这是我这台 T966D5 的实测，不代表所有 TCL。待机唤醒和信号源逐项测试还有问题，完整日志、脱敏记录和回退说明都在 GitHub。评论区留型号，我先查兼容性再讨论怎么试。`
+**29–35 秒：说明边界并邀请交流**  
+画面文字：`单台 T966D5 / Android 14 实测；待机唤醒仍有问题`  
+旁白：`这只是我这台 T966D5 的实测，不代表所有 TCL。待机唤醒还没通过，信号源逐项测试也没跑通。完整日志、脱敏记录和恢复说明都在 GitHub。评论区留下型号，我先查兼容情况再讨论怎么试。`
 
-Suggested caption: `一台雷鸟 T966D5 的第三方 HOME 实测：遇到 TCL 安装校验后，通过临时单包策略放行和电视自带安装入口，完成 Aerial 1.46 安装；原厂桌面仍保留。重启自动进入已验证，待机唤醒未通过。完整诊断、脱敏聊天记录和限制见案例仓库。请不要直接照搬别的机型包名。`
+**配文建议：**  
+`一台雷鸟 T966D5 的第三方 HOME 实测：遇到 TCL 安装校验后，通过临时单包策略放行和电视自带安装入口，完成 Aerial 1.46 安装；原厂桌面仍保留。重启后自动进入已验证，待机唤醒未通过。完整诊断、脱敏聊天记录和适用限制见案例仓库。请勿直接照搬其他机型的包名。`
 
-## Xiaohongshu carousel draft (8 panels)
+## 小红书图文建议（8 页）
 
-1. **Cover:** `雷鸟鹤6 Ultra 换桌面踩坑记录` / `T966D5 · Android 14 · Aerial 1.46` with a real Aerial screen photo.
-2. **Before:** CyberUI HOME, photographed straight-on; add a small “原厂桌面” caption.
-3. **The blocker:** sanitized installation failure text: `INSTALL_FAILED_VERIFICATION_FAILURE`; explain that the vendor check blocked the HOME-capable APK.
-4. **What actually worked:** backup current config → temporary package-specific Aerial exception → MultiScreen push/install → restore the saved config → reboot and check. Keep internals high-level; link the repository for exact evidence.
-5. **After:** real Aerial home screen plus version 1.46 screen; note CyberUI remains installed/enabled as fallback.
-6. **What passed:** Home behavior and reboot first sample entered Aerial. Use short labels and avoid implying universal compatibility.
-7. **What did not pass:** standby wake returned to TCL TV within the tested 60-second window; input enumeration did not run because the API output did not match the test script. This transparency makes the case more reproducible.
-8. **Repository + question:** `littleCareless/iffalcon-t966d5-tv-notes` and `https://github.com/littleCareless/iffalcon-t966d5-tv-notes`; ask `你家的品牌、型号、Android 版本是什么？`
+1. **封面：** `雷鸟鹤 6 Ultra 换桌面踩坑记录` / `T966D5 · Android 14 · Aerial 1.46`，配真实 Aerial 桌面照片。
+2. **改造前：** 正面拍 CyberUI 首页，标注“原厂桌面”。
+3. **遇到拦截：** 展示脱敏后的 `INSTALL_FAILED_VERIFICATION_FAILURE`，说明是厂商校验拦住了支持 HOME 的安装包。
+4. **实际做法：** 备份现有配置 → 临时为 Aerial 增加单包例外 → 通过多屏互动安装 → 恢复保存的配置 → 重启核对。内部操作细节放在仓库，不要展示原始数据库内容。
+5. **改造后：** 展示真实 Aerial 首页和版本 1.46 页面，说明 CyberUI 仍安装并启用，可作为备用桌面。
+6. **通过的项目：** Home 键行为和重启后的首次 Aerial 前台采样。用简短文字标注，不暗示其他电视也适用。
+7. **未通过的项目：** 待机唤醒后，测试窗口内仍停留在 TCL TV；信号源列表没有成功读出，因此没有逐项测试。说明限制可以帮助别人正确复现。
+8. **仓库和提问：** `littleCareless/iffalcon-t966d5-tv-notes`，并问：`你家的品牌、型号和 Android 版本是什么？`
 
-Suggested note text:
+**小红书正文建议：**
 
-> 给一台雷鸟鹤6 Ultra（系统识别 T966D5）换 Aerial 桌面，真正卡住我的不是安装包，而是 TCL 的桌面安装校验。经过备份、临时单包放行、电视自带多屏互动安装，再恢复策略，Aerial 1.46 成为默认 HOME；原厂 CyberUI 仍保留。重启后首次检查已进入 Aerial，但待机唤醒测试仍回到 TCL TV，信号源逐项测试也没跑通。完整诊断输出、脱敏会话记录、设备限制和恢复说明都放在公开仓库。只验证了这一台和这一版固件，别把包名或数据库方案直接套到其他电视。
+> 给一台雷鸟鹤 6 Ultra（系统识别为 T966D5）换 Aerial 桌面，真正卡住我的不是安装包，而是 TCL 的桌面安装校验。备份配置后，我临时为 Aerial 添加单包例外，再通过电视自带的多屏互动安装，完成后恢复原策略。Aerial 1.46 已成为默认 HOME，CyberUI 仍保留。重启后首次检查进入 Aerial；待机唤醒测试仍回到 TCL TV，信号源逐项测试也没有跑通。完整诊断输出、脱敏聊天记录、设备限制和恢复说明都放在公开仓库。只在这一台电视和这一版固件上验证过，请勿把包名或数据库方案直接套到其他电视。
 
-## Screenshot and recording checklist
+## 截图与录屏清单
 
-Capture fresh material from the TV before posting; no screenshot is fabricated or included in the public repository.
+发布前请先检查并准备真实素材；公开仓库没有放入截图，也没有制作伪造的电视画面。
 
-There is a local 2026-10-29 post-reboot Aerial capture (`after-batch3-reboot.png`) that can serve as a current HOME visual, but its status bar shows the city, time, and weather, and it does not show the Aerial version. Crop or mask that strip before sharing, and use the diagnostic output separately for the 1.46/version and reboot evidence. Older `before-home.png` material shows a TCL account/membership banner; replace it with a fresh capture or crop that banner out.
+本机有一张 2026-10-29 重启后的 Aerial 截图，可用来展示当前桌面，但状态栏露出城市、时间和天气，也没有显示 Aerial 版本。分享前请裁掉或遮挡状态栏；1.46 版本和重启结果应另用诊断记录说明。较早的 `before-home.png` 截图露出 TCL 账号/会员横幅，建议重新拍摄，或先裁掉横幅再分享。
 
-- Clear, full-screen CyberUI “before” and Aerial “after”, same camera angle and screen brightness.
-- Aerial About/version page showing `1.46`.
-- A short continuous recording: press Home from another app, reboot, then film the first visible screen. Do not edit out an intervening manufacturer screen if it appears.
-- Sanitized installation error showing the verification failure, if still available.
-- Optional: a brief view of the settings/strategy backup and restoration *without* showing raw database contents, local paths, network addresses, device serials, account identity, or ADB keys.
-- Do not show a home Wi-Fi list, QR codes that expose local control URLs, the TV's IP, notification banners, personal photos, or account names.
-- Do not claim standby or HDMI/source testing passed; the recorded standby test failed and input enumeration was not completed.
+- 同一机位拍清楚 CyberUI“改造前”和 Aerial“改造后”。
+- 拍 Aerial“关于”或版本页面，显示 `1.46`。
+- 连续录制按 Home 键和重启后的首次画面；若中途出现厂商桌面，不要剪掉这一段。
+- 如果仍有安装失败画面，可展示已脱敏的校验失败信息。
+- 可拍配置备份和恢复的大致过程，但不要露出数据库原文、本机路径、网络地址、设备序列号、账号资料或 ADB 密钥。
+- 不要拍到家庭 Wi-Fi 列表、含本地控制地址的二维码、电视 IP、通知横幅、个人照片或账号名称。
+- 不要声称待机或 HDMI/信号源测试通过；本次待机测试未通过，信号源逐项测试没有完成。
 
-## Repo identity and call to action
+## 仓库名称与引导语
 
-- Repository: [`littleCareless/iffalcon-t966d5-tv-notes`](https://github.com/littleCareless/iffalcon-t966d5-tv-notes)
-- Suggested short repo description: `A documented, reversible Aerial HOME setup and TCL T966D5 Android 14 diagnostic case. Single-device evidence; no universal debloat list.`
-- Link directly to [Aerial HOME notes](aerial-home.md), [full diagnostics](../diagnostics/2026-10-29-report.sh.md), [self-test and correction](../diagnostics/2026-10-29-selftest.sh.md), and [redacted conversation](conversation-redacted.md).
+- 仓库：[`littleCareless/iffalcon-t966d5-tv-notes`](https://github.com/littleCareless/iffalcon-t966d5-tv-notes)
+- 仓库简介建议：`雷鸟 TCL T966D5 / Android 14 的 Aerial HOME 实测、可逆配置、诊断与恢复记录。单机案例，不提供通用精简清单。`
+- 可直接链接到 [Aerial HOME 记录](aerial-home.md)、[`report.sh` 诊断全文](../diagnostics/2026-10-29-report.sh.md)、[`selftest.sh` 输出与更正](../diagnostics/2026-10-29-selftest.sh.md)和[脱敏聊天记录](conversation-redacted.md)。
 
-## Sources and evidence limits
+## 来源与证据范围
 
-- Viral post and engagement figures: secondary article snapshots; counts vary over time and were not independently checked against the original platform post.
-- Xiaomi troubleshooting article: a detailed first-person technical account, useful for story structure and troubleshooting narrative; it is a different TV and its findings do not prove anything about this TCL.
-- Aerial project: primary source for its own installation flow, supported-device notes and feature claims. The case above relies on this television's own observed diagnostics for results.
+- 热门帖及互动数据来自媒体对原帖的转述；数字会随时间变化，未在原平台实时核实。
+- 小米电视排查文章是另一台电视的第一手记录，可参考其叙事方式，但不能证明本 TCL 电视也有相同行为。
+- Aerial 项目页面是其安装流程、机型说明和功能的第一方来源；本案例结论依据这台电视的实际诊断记录。
