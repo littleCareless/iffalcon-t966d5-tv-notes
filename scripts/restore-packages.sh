@@ -3,7 +3,7 @@ set -eu
 
 ADB=${ADB:-adb}
 ADB_SERVER_PORT=${ADB_SERVER_PORT:-5037}
-TV_SERIAL=${TV_SERIAL:?Set TV_SERIAL to the TV current ADB serial, for example 192.168.1.20:5555}
+TV_SERIAL=${TV_SERIAL:?Set TV_SERIAL to the TV current ADB serial, for example TV_ADDRESS:5555}
 
 adb_tv() {
   "$ADB" -P "$ADB_SERVER_PORT" -s "$TV_SERIAL" "$@"
