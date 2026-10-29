@@ -6,6 +6,34 @@
 
 本记录参考了 [FFALCON/TCL T982 清理与换桌面实录](https://github.com/bozhang0419/ffalcon-t982-debloat) 的结构，涵盖设备与固件、实测结果、可逆操作、回滚和经验。该项目针对 T982 / Android 11；本机硬件与系统不同，不能直接套用其包名、结论或命令。
 
+## 实机方案：将 Aerial 设为系统默认 HOME
+
+这台雷鸟鹤 6 Ultra（系统识别为 T966D5 / Android 14 / AU01）最终通过官方 Aerial **standard** 版实现真正的默认 HOME。我们在 Aerial 上游提交的 [Issue #420](https://github.com/pengchujin/aerial-tv/issues/420) 记录了适配背景、实测结果和更细的复现材料；下方是本仓库的简明方案。
+
+1. **先核对机型和固件。** 下面流程只在本仓库记录的 T966D5 / Android 14 / `UTT2.250416.001 AU01` 上实测。备份原始 HOME、启动项、完整安装配置及缓存、应用状态；其他机型或配置结构不同，应先停下来重新调查。
+2. **通过电视内置多屏互动安装通道。** 普通 ADB 安装 Aerial standard 会被本固件的 TCL 桌面签名校验拒绝。我们读取安装策略后，只在 `launcherStrategy.packages` 临时放行 `app.orchard.tv`，保留其他校验策略；重启后同时确认配置数据库与 FeatureCache 已加载临时值，再由多屏互动推送官方 standard APK，并在电视弹窗上确认安装。不能只改数据库而忽略缓存。
+3. **把 Aerial 登记为默认 HOME。** 核实安装包、签名/版本及 HOME 活动后执行：
+
+   ```sh
+   adb -s TV_ADB_ADDRESS:5555 shell cmd package set-home-activity --user 0 app.orchard.tv/.MainActivity
+   adb -s TV_ADB_ADDRESS:5555 shell cmd package resolve-activity --brief -a android.intent.action.MAIN -c android.intent.category.HOME
+   ```
+
+   将 `TV_ADB_ADDRESS:5555` 替换成操作者自己的 ADB 地址。解析结果应指向 `app.orchard.tv/.MainActivity`。原厂 CyberUI 保留安装并启用，系统安装器也始终保持启用。
+4. **还原临时白名单并复核。** 安装成功或失败都恢复完整原始配置，重启后逐字核对数据库和 FeatureCache 与备份一致；同时复查原机应用状态。不要把安装白名单长期留在放宽状态。
+5. **单独核对开机目标。** 本机记录到 TCL 的 `boot_app_componentname` 是独立启动项。先备份并读取 `boot_app_mode` 与原启动目标；本机保持 `boot_app_mode=boot_launcher`，将目标改为 Aerial 后重启验收：
+
+   ```sh
+   adb -s TV_ADB_ADDRESS:5555 shell settings get system boot_app_mode
+   adb -s TV_ADB_ADDRESS:5555 shell settings get system boot_app_componentname
+   # 仅当原模式/当前机型与本案例相符，且已备份原值时才设置：
+   adb -s TV_ADB_ADDRESS:5555 shell settings put system boot_app_componentname app.orchard.tv/.MainActivity
+   ```
+
+**实测结果：** 实体 Home 键直接进入 Aerial，不再闪过 CyberUI；重启后用户未按 Home，电视自动进入 Aerial。两项结果分别验收。启动日志曾显示解锁后由 AerialGuard 接管，因此不能据此保证开机每个阶段都不出现原桌面，也不能断言单独修改启动项就是唯一原因；长期稳定性及其他机型尚未验证。
+
+Android 11 / T982 社区案例里的“临时停用 `com.android.packageinstaller`”不适用于本机：Android 14 会保护系统安装器。本方案不依赖停用安装器、关闭总体验证、卸载原桌面或删除原机应用。完整证据见 [Issue #420](https://github.com/pengchujin/aerial-tv/issues/420) 与 [Aerial HOME 实机记录](docs/aerial-home.md)。
+
 ## 设备与当前记录
 
 - 商品型号：雷鸟鹤 6 Ultra，2027 款，85 英寸（所有者提供）。
